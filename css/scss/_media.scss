@@ -1,0 +1,145 @@
+// _media-queries.scss
+
+/*------------------------------------*\
+    RESPONSIVE
+\*------------------------------------*/
+
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 960px;
+$large: 1200px;
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx),
+only screen and (min-width: $large)
+{
+  .form {
+    background-image: url('../img/form-bg@2x.jpg');
+  }
+}
+
+@media screen and (max-width: $large) {
+
+}
+@media screen and (max-width: $desktop) {
+  .slider {
+    &__controls {
+      max-width: 768px;
+      margin: -15px 0 0 -384px;
+    }
+    &__title {
+      font-size: 42px;
+      line-height: 1.2;
+    }
+    &__prev {
+      margin: 0 0 0 10px;
+    }
+    &__next {
+      margin: 0 10px 0 0;
+    }
+  }
+}
+@media screen and (max-width: $tablet) {
+  .header {
+    &__menu {
+      li {
+        margin: 0 25px 0 0;
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+  .slider {
+    &__controls {
+      display: none;
+    }
+    &__title {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    &__textwrap {
+      width: 50%;
+      margin: 0 15px 0 0;
+    }
+    &__button {
+      margin: 15px auto 0;
+    }
+  }
+  .about {
+    &__textblock {
+      width: 100%;
+    }
+    &__photoblock {
+      display: none;
+      &-mobile {
+        width: 40%;
+        display: block;
+        float: right;
+      }
+    }
+  }
+  .form {
+    &__wrapper {
+      padding: 35px 10px 32px 10px;
+    }
+  }
+}
+@media screen and (max-width: $mobile) {
+  .slicknav {
+    &_menu {
+      position: relative;
+      display: block;
+      background: none;
+      padding: 0;
+    }
+    &_btn {
+      background: none;
+    }
+    &_nav {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      z-index: 2;
+      background: #2c3e50;
+      border-radius: 0 0 3px 3px;
+      li{
+        a {
+          font-size: 18px;
+          margin: 0 5px;
+          padding: 10px 24px;
+          &:hover {
+            color: #ffffff;
+            background: none;
+            text-decoration: underline;
+          }
+        }
+        &.button {
+          background: #27ae60;
+          background: -moz-linear-gradient(top,  #27ae60 0%, #239d57 100%);
+          background: -webkit-linear-gradient(top,  #27ae60 0%,#239d57 100%);
+          background: linear-gradient(to bottom,  #27ae60 0%,#239d57 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27ae60', endColorstr='#239d57',GradientType=0 );
+        }
+      }
+    }
+  }
+  .header {
+    &__menu {
+      display: none;
+    }
+    &__button {
+      display: none;
+    }
+  }
+  .slider {
+    &__wrapper {
+      height: 100vw;
+    }
+    &__textwrap {
+      width: 75%;
+    }
+  }
+}
