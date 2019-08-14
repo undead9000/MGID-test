@@ -34,10 +34,12 @@ only screen and (min-width: $large)
       line-height: 1.2;
     }
     &__prev {
-      margin: 0 0 0 10px;
+      margin: -15px 0 0 0;
+      left: 30px;
     }
     &__next {
-      margin: 0 10px 0 0;
+      margin: -15px 0 0 0;
+      right: 30px;
     }
   }
 }

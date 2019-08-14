@@ -9,6 +9,8 @@
   transition: $time * 1s all ease-in-out;
 }
 @mixin baseButton() {
+  position: relative;
+  z-index: 100;
   color: #ffffff;
   display: block;
   font-size: 15px;
@@ -17,24 +19,34 @@
   text-align: center;
   border-radius: 3px;
   background: #27ae60;
-  background: -moz-linear-gradient(top,  #27ae60 0%, #239d57 100%);
-  background: -webkit-linear-gradient(top,  #27ae60 0%,#239d57 100%);
-  background: linear-gradient(to bottom,  #27ae60 0%,#239d57 100%);
+  background-image: -moz-linear-gradient(top,  #27ae60 0%, #239d57 100%);
+  background-image: -webkit-linear-gradient(top,  #27ae60 0%,#239d57 100%);
+  background-image: linear-gradient(to bottom,  #27ae60 0%,#239d57 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27ae60', endColorstr='#239d57',GradientType=0 );
+  opacity: 1;
 }
 @mixin baseButtonHover() {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  transition: opacity 0.2s;
   background: #36c773;
-  background: -moz-linear-gradient(top,  #36c773 0%, #31b367 100%);
-  background: -webkit-linear-gradient(top,  #36c773 0%,#31b367 100%);
-  background: linear-gradient(to bottom,  #36c773 0%,#31b367 100%);
+  border-radius: 3px;
+  background-image: -moz-linear-gradient(top,  #36c773 0%, #31b367 100%);
+  background-image: -webkit-linear-gradient(top,  #36c773 0%,#31b367 100%);
+  background-image: linear-gradient(to bottom,  #36c773 0%,#31b367 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#36c773', endColorstr='#31b367',GradientType=0 );
+  opacity: 0;
 }
 .slicknav {
   &_menu {
     display: none;
   }
 }
-
 .wrapper {
   width: 100%;
   max-width: 960px;
@@ -140,8 +152,8 @@
     .chosen-results {
       margin: 0;
       padding: 0;
-      /*max-height: 150px;
-      overflow: hidden !important;*/
+      max-height: 150px!important;
+      overflow-y: scroll;
       .disabled-result {
         display: none;
       }
@@ -152,6 +164,19 @@
         border-bottom: 1px solid #c4c4c4;
       }
     }
+  }
+}
+.mCSB {
+  &_scrollTools {
+    margin: 2px 0!important;
+    width: 8px;
+  }
+  &_dragger_bar {
+    background: #555555!important;
+  }
+  &_draggerRail {
+    background: rgba(85,85,85,0.2)!important;
+    width: 4px!important;
   }
 }
 
@@ -206,8 +231,13 @@
   &__button {
     width: 90px;
     @include baseButton();
-    &:hover {
+    &:before {
       @include baseButtonHover();
+    }
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
     }
   }
 }
@@ -248,8 +278,13 @@
     width: 80px;
     margin: 52px auto 0;
     @include baseButton();
-    &:hover {
+    &:before {
       @include baseButtonHover();
+    }
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
     }
   }
   &__controls {
@@ -261,15 +296,24 @@
     top: 50%;
     left: 50%;
     margin: -15px 0 0 -480px;
+    padding: 0 30px;
     z-index: 2;
   }
   &__prev {
     background: url('../img/left.svg') no-repeat;
-    margin: 0 0 0 30px;
+    position: absolute;
+    top: 50%;
+    margin: -15px 0 0 30px;
+    left: calc(50vw - 480px);
+    z-index: 2;
   }
   &__next {
     background: url('../img/right.svg') no-repeat;
-    margin: 0 30px 0 0;
+    position: absolute;
+    top: 50%;
+    margin: -15px 30px 0 0;
+    right: calc(50vw - 480px);
+    z-index: 2;
   }
 }
 .about {
@@ -309,7 +353,6 @@
   }
   &__img {
     display: inline-block;
-
   }
 }
 .form {
@@ -343,6 +386,21 @@
       margin: 0 0 20px 0;
     }
   }
+  &__submit {
+    width: 120px;
+    margin: 0 auto;
+    cursor: pointer;
+    @include baseButton();
+    padding: 0;
+    &:before {
+      @include baseButtonHover();
+    }
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
   input {
     font-size: 20px;
     width: 100%;
@@ -358,14 +416,14 @@
       outline: none;
     }
     &[type="submit"] {
-      width: 120px;
-      margin: 0 auto;
-      cursor: pointer;
-      @include baseButton();
+      color: #ffffff;
+      background: none;
+      display: block;
+      font-size: 15px;
+      text-transform: uppercase;
+      border: none;
       padding: 15px 0 16px 0;
-      &:hover {
-        @include baseButtonHover();
-      }
+      cursor: pointer;
     }
   }
 }
